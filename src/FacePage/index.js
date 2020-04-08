@@ -36,8 +36,8 @@ class FacePage extends Component {
                     //console.log("face detected",result);
                     const dims = faceapi.matchDimensions(this.props.canvas.current, this.props.video.current, true);
                     const resizedResult = faceapi.resizeResults(result, dims);
-                    faceapi.draw.drawDetections(this.props.canvas.current, resizedResult);
-                    faceapi.draw.drawFaceLandmarks(this.props.canvas.current, resizedResult);
+                    //faceapi.draw.drawDetections(this.props.canvas.current, resizedResult);
+                    //faceapi.draw.drawFaceLandmarks(this.props.canvas.current, resizedResult);
                    // ################ 
                    // ################ 
                    const minProbability = 0.05  
@@ -55,7 +55,40 @@ class FacePage extends Component {
                       ).draw(this.props.canvas.current)
                       // ################ 
                       // ################ 
-                   
+                      /*
+                      let base_image = new Image();
+                    base_image.src = 'https://i.ya-webdesign.com/images/lentes-de-sol-png-3.png';
+                    base_image.onload = function(){
+                        canvasElement.drawImage(base_image, result.landmarks.positions[36].x-15, 
+                                result.landmarks.positions[36].y-25,130,50);
+                    }*/
+                    let base_image_lentes = new Image();
+                    base_image_lentes.src = 'https://cdn.pixabay.com/photo/2014/04/02/10/16/sunglasses-303327_960_720.png';
+                    base_image_lentes.onload = function(){
+                        canvasElement.drawImage(base_image_lentes, result.landmarks.positions[36].x-25, 
+                                result.landmarks.positions[36].y-23,140,60);
+                    }
+
+                    let base_image_virus_izquierda = new Image();
+                    base_image_virus_izquierda.src = 'https://www.pcc.edu/online/wp-content/uploads/sites/78/2015/07/germ-158107_640.png';
+                    base_image_virus_izquierda.onload = function(){
+                        canvasElement.drawImage(base_image_virus_izquierda, result.landmarks.positions[1].x-100, 
+                                result.landmarks.positions[1].y-25,64,49);
+                    }
+
+                    let base_image_virus_derecha = new Image();
+                    base_image_virus_derecha.src = 'https://www.pcc.edu/online/wp-content/uploads/sites/78/2015/07/germ-158107_640.png';
+                    base_image_virus_derecha.onload = function(){
+                        canvasElement.drawImage(base_image_virus_derecha, result.landmarks.positions[15].x+30, 
+                                result.landmarks.positions[15].y-25,64,49);
+                    }
+
+                    let base_image_mascarilla = new Image();
+                    base_image_mascarilla.src = 'https://www.abrasivosandra.com/sitio/images/2730_sin_fondo_.png';
+                    base_image_mascarilla.onload = function(){
+                        canvasElement.drawImage(base_image_mascarilla, result.landmarks.positions[1].x+1, 
+                                result.landmarks.positions[1].y-25,150,150);
+                    }
 
                     //ADD CANVAS
                     const currentCanvas = ReactDOM.findDOMNode(this.props.canvas.current);
@@ -71,10 +104,20 @@ class FacePage extends Component {
                      
                     //const leftEyeBbrow = landmarks.getLeftEyeBrow();
 
-                    canvasElement.fillRect(result.landmarks.positions[this.state.positionIndex].x,
+                   /* canvasElement.fillRect(result.landmarks.positions[this.state.positionIndex].x,
                                  result.landmarks.positions[this.state.positionIndex].y, 
                                  10, 10);
-                    canvasElement.closePath();
+                    canvasElement.closePath(); */
+
+                    canvasElement.font="20px Comic Sans MS";
+                    canvasElement.fillStyle = "red";
+                    let positionX=result.landmarks.positions[27].x,
+                        positionY=result.landmarks.positions[27].y-70;
+                    //canvasElement.strokeText( (result.gender)==="male" ? "Hombre" :"Mujer", 
+                    canvasElement.fillText( (result.gender)==="male" ? "Hombre" :"Mujer", 
+                        positionX,positionY );
+
+                    //canvasElement.im
                 }
             }catch(exception){
                 console.log(exception);
@@ -136,6 +179,7 @@ class FacePage extends Component {
             <div>
                 <Camera/>
                 <Canva/>
+               
                 <input type="number" 
                     style={{marginLeft:1000}} 
                     value={this.state.positionIndex} 

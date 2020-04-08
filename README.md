@@ -8,6 +8,8 @@ A continuación se muestra un ejemplo del uso de face-api.js
 
 [![Face Api](/readme_image/face-api.JPG)](readme_image/face-api.JPG)
 
+[![Filtro Cesar](/readme_image/filtro-cesar.jpeg)](readme_image/filtro-cesar.jpeg)
+
 
 # Versiones
 
